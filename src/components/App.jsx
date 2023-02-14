@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Phonebook from './Phonebook';
 import Contacts from './Contacts';
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
@@ -13,18 +14,27 @@ export class App extends Component {
   };
   addContact = contact => {
     this.setState({
-      contacts: [
-        ...this.state.contacts,
-        { ...contact, id: `id-${this.state.contacts.length + 1}` },
-      ],
+      contacts: [...this.state.contacts, { ...contact, id: `id-${nanoid()}` }],
     });
+  };
+  deleteContact = contactId => {
+    this.setState(prevContacts => ({
+      contacts: prevContacts.contacts.filter(
+        contact => contact.id !== contactId
+      ),
+    }));
+    console.log(contactId);
   };
   render() {
     const { contacts } = this.state;
+
     return (
       <div>
         <Phonebook onAddContact={contact => this.addContact(contact)} />
-        <Contacts items={contacts} />
+        <Contacts
+          onDeleteContact={contact => this.deleteContact(contact)}
+          items={contacts}
+        />
       </div>
     );
   }

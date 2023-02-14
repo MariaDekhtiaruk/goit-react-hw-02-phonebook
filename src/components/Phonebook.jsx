@@ -2,7 +2,6 @@ import Section from './Section';
 import NameInput from './NameInput';
 import { Component } from 'react';
 
-const mock = { name: 'Rosie Simpson 22222', number: '459-12-56' };
 class Phonebook extends Component {
   state = {
     contactName: '',

@@ -19,7 +19,7 @@ class Contacts extends Component {
   };
 
   render() {
-    const { items } = this.props;
+    const { items, onDeleteContact } = this.props;
     const { filter } = this.state;
 
     return (
@@ -34,9 +34,11 @@ class Contacts extends Component {
             .map(contactItem => {
               return (
                 <ContactItem
+                  id={contactItem.id}
                   key={contactItem.id}
                   contactName={contactItem.name}
                   phone={contactItem.number}
+                  onDeleteContact={onDeleteContact}
                 ></ContactItem>
               );
             })}
