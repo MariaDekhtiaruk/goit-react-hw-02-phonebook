@@ -13,6 +13,9 @@ export class App extends Component {
     ],
   };
   addContact = contact => {
+    if (this.state.contacts.find(item => item.name === contact.name)) {
+      return alert(`${contact.name} is already in contact`);
+    }
     this.setState({
       contacts: [...this.state.contacts, { ...contact, id: `id-${nanoid()}` }],
     });
