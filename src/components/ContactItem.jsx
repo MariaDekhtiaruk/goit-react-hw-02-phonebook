@@ -1,7 +1,10 @@
-const ContactItem = ({ contactName, phone, id, onDeleteContact }) => {
+import PropTypes from 'prop-types';
+import { ContactPropType } from 'ContactPropType';
+
+const ContactItem = ({ contact: { name, number, id }, onDeleteContact }) => {
   return (
-    <li>
-      {contactName}: {phone}
+    <li className="list-item">
+      {name}: {number}
       <button
         type="button"
         className="button-delete"
@@ -12,4 +15,10 @@ const ContactItem = ({ contactName, phone, id, onDeleteContact }) => {
     </li>
   );
 };
+
+ContactItem.propTypes = {
+  contact: ContactPropType,
+  onDeleteContact: PropTypes.func,
+};
+
 export default ContactItem;

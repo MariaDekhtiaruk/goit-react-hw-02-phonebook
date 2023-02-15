@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const NameInput = ({ title, onChange, value }) => {
   return (
     <>
@@ -13,5 +14,10 @@ const NameInput = ({ title, onChange, value }) => {
       />
     </>
   );
+};
+NameInput.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 export default NameInput;

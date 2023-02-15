@@ -1,3 +1,4 @@
+import './App.css';
 import React, { Component } from 'react';
 import Phonebook from './Phonebook';
 import Contacts from './Contacts';
@@ -32,8 +33,11 @@ export class App extends Component {
     const { contacts } = this.state;
 
     return (
-      <div>
-        <Phonebook onAddContact={contact => this.addContact(contact)} />
+      <div className="app">
+        <Phonebook
+          className="phonebook"
+          onAddContact={contact => this.addContact(contact)}
+        />
         <Contacts
           onDeleteContact={contact => this.deleteContact(contact)}
           items={contacts}

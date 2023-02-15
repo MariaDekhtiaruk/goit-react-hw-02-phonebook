@@ -2,6 +2,8 @@ import Section from './Section';
 import NameInput from './NameInput';
 import ContactItem from './ContactItem';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+import { ContactPropType } from 'ContactPropType';
 
 const isSubstringPresentInString = (string, substring) => {
   return string.toLowerCase().includes(substring.toLowerCase());
@@ -28,16 +30,14 @@ class Contacts extends Component {
           title="Find contacts by name"
           onChange={this.onChangeHandler}
         ></NameInput>
-        <ul>
+        <ul className="list">
           {items
             .filter(item => isSubstringPresentInString(item.name, filter))
             .map(contactItem => {
               return (
                 <ContactItem
-                  id={contactItem.id}
+                  contact={contactItem}
                   key={contactItem.id}
-                  contactName={contactItem.name}
-                  phone={contactItem.number}
                   onDeleteContact={onDeleteContact}
                 ></ContactItem>
               );
@@ -47,4 +47,10 @@ class Contacts extends Component {
     );
   }
 }
+
+Contacts.propTypes = {
+  items: PropTypes.arrayOf(ContactPropType),
+  onDeleteContact: PropTypes.func,
+};
+
 export default Contacts;

@@ -1,7 +1,8 @@
 import Section from './Section';
 import NameInput from './NameInput';
+import NumberInput from './NumberInput';
 import { Component } from 'react';
-
+import PropTypes from 'prop-types';
 class Phonebook extends Component {
   state = {
     contactName: '',
@@ -20,19 +21,15 @@ class Phonebook extends Component {
     console.log(this.state);
     return (
       <Section title="Phonebook" childrenClassName="phonebook">
-        <form>
+        <form className="phonebook-form">
           <NameInput
             title="Name"
             value={contactName}
             onChange={this.onChangeName}
           ></NameInput>
-          <input
+          <NumberInput
+            title="Number"
             value={number}
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
             onChange={this.onChangePhone}
           />
           <button
@@ -53,4 +50,7 @@ class Phonebook extends Component {
     );
   }
 }
+Phonebook.propTypes = {
+  onAddContact: PropTypes.func,
+};
 export default Phonebook;
