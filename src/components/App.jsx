@@ -1,8 +1,10 @@
 import './App.css';
 import React, { Component } from 'react';
-import Phonebook from './Phonebook';
-import Contacts from './Contacts';
+import ContactForm from './ContactForm';
+import Filter from './Filter';
 import { nanoid } from 'nanoid';
+import ContactList from './Contactlist';
+import Section from './Section';
 
 export class App extends Component {
   state = {
@@ -12,6 +14,7 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
+    filter: '',
   };
   addContact = contact => {
     if (this.state.contacts.find(item => item.name === contact.name)) {
@@ -29,19 +32,30 @@ export class App extends Component {
     }));
     console.log(contactId);
   };
+  updateFilter = filterString => {
+    this.setState({ filter: filterString });
+  };
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
 
     return (
       <div className="app">
-        <Phonebook
-          className="phonebook"
-          onAddContact={contact => this.addContact(contact)}
-        />
-        <Contacts
-          onDeleteContact={contact => this.deleteContact(contact)}
-          items={contacts}
-        />
+        <Section title="Phonebook" childrenClassName="phonebook">
+          <ContactForm
+            className="phonebook"
+            onAddContact={contact => this.addContact(contact)}
+          />
+        </Section>
+        <Section title="Contacts" childrenClassName="contacts">
+          <Filter
+            onFilterUpdate={filterString => this.updateFilter(filterString)}
+          />
+          <ContactList
+            contacts={contacts}
+            onDeleteContact={contact => this.deleteContact(contact)}
+            filter={filter}
+          ></ContactList>
+        </Section>
       </div>
     );
   }

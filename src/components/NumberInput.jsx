@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-const NumberInput = ({ title, number, onChange }) => {
+const NumberInput = ({ title, value, onChange, pattern }) => {
   return (
     <>
       <h2>{title}</h2>
       <input
-        value={number}
+        value={value}
         type="tel"
         name="number"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+        pattern={pattern}
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
         onChange={onChange}
